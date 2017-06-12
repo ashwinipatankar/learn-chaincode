@@ -42,7 +42,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
 	}
 
-	err := stub.PutState("hello_world", []byte(args[0]))
+	err := stub.PutState("ALERT", []byte(args[0]))
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 		return nil, errors.New("Incorrect number of arguments. Expecting 2. name of the key and value to set")
 	}
 
-	key = args[0] //rename for funsies
+	key = "ALERT" //args[0] //rename for funsies
 	value = args[1]
 	err = stub.PutState(key, []byte(value)) //write the variable into the chaincode state
 	if err != nil {

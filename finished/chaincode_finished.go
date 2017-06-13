@@ -37,11 +37,12 @@ func main() {
 
 // Init resets all the things
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	if len(args) != 1 {
-		log.Println("Incorrect number of arguments. Expecting 1")
-		return nil, errors.New("Incorrect number of arguments. Expecting 1")
-	}
-
+	/*	if len(args) != 1 {
+			log.Println("Incorrect number of arguments. Expecting 1")
+			return nil, errors.New("Incorrect number of arguments. Expecting 1")
+		}
+	*/
+	fmt.Println(args[0])
 	err := stub.PutState("ALERT", []byte(args[0]))
 	if err != nil {
 		return nil, err
@@ -58,6 +59,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	if function == "init" {
 		return t.Init(stub, "init", args)
 	} else if function == "write" {
+		fmt.Println(args[0])
 		return t.write(stub, args)
 	}
 	log.Println("invoke did not find func: " + function)
